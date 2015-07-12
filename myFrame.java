@@ -9,7 +9,7 @@ import java.awt.Color;
 public class MyFrame extends JFrame {
   public static void main ( String [] args ) {
 	  MyFrame grid = new MyFrame();
-      grid.setSize( 0, 0 );
+	  grid.setSize(300,300);
       grid.setResizable( false );
       grid.setLocationRelativeTo( null );
       grid.setLayout( new GridLayout(5,5) );
@@ -22,12 +22,11 @@ public class MyFrame extends JFrame {
       for ( int i = 0; i < 25; i++ )
       {
           temp = new JPanel();
-          temp.setSize( 60,60 );
+          temp.setSize( 60, 60 );
           components.add( temp );
           container.add(temp);
       }
 
-      grid.pack();
       grid.setVisible( true );
       components.get( 0 ).setBackground( Color.BLACK );
       components.get( 1 ).setBackground( Color.CYAN );
