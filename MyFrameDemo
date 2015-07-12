@@ -1,1 +1,14 @@
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.Window;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+
+public class MyFrameDemo {
+	public static void main(String[] args) {
+		
+	}
+}
 
