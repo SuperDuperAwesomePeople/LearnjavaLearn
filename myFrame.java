@@ -13,7 +13,7 @@ public class MyFrame extends JFrame {
       grid.setLocationRelativeTo( null );
       grid.setLayout( new GridLayout(5,5) );
       
-      Container container = myframe.getContentPane();
+      Container container = grid.getContentPane();
       ArrayList < JPanel > components = new ArrayList < JPanel >();
       JPanel temp = null;
 
@@ -26,11 +26,9 @@ public class MyFrame extends JFrame {
           container.add(temp);
       }
 
-      myframe.pack();
-      myframe.setVisible( true );
+      grid.pack();
+      grid.setVisible( true );
 
-      // Accessing components via index.
-      components.get( 5 ).setBackground( Color.BLUE );
-      components.get( 8 ).setBackground( Color.GREEN );
+
   }
 }
