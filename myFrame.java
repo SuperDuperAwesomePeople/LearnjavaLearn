@@ -9,7 +9,6 @@ import java.awt.Color;
 public class MyFrame extends JFrame {
 	  MyFrame grid = new MyFrame();
 	  public ArrayList<JPanel> makeGridComponents() {
-		  MyFrame grid = new MyFrame();
 		  grid.setSize(900,900);
 		  grid.setResizable( false );
 		  grid.setLocationRelativeTo( null );
