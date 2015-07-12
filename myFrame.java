@@ -18,7 +18,7 @@ public class MyFrame extends JFrame {
       JPanel temp = null;
 
       // Populating Arraylist object.
-      for ( int i = 0; i < 9; i++ )
+      for ( int i = 0; i < 25; i++ )
       {
           temp = new JPanel();
           temp.setSize( 60,60 );
