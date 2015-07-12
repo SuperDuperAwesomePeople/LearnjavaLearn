@@ -8,8 +8,10 @@ import java.awt.Color;
 
 public class MyFrameDemo {
 	public static void main(String[] args) {
-		  myFrame grid = new myFrame();
-		  grid.makeGridComponents();
-		  grid.makeGridContainer();
+		MyFrame grid = new MyFrame();
+		ArrayList<JPanel> components = grid.makeGridComponents();
+		grid.makeGridContainer();
+		grid.setVisible( true );
+		components.get( 4 ).setBackground( Color.GREEN );
 	}
 }
