@@ -29,8 +29,14 @@ public class MyFrame extends JFrame {
 
       grid.pack();
       grid.setVisible( true );
-
+      components.get( 0 ).setBackground( Color.BLACK );
+      components.get( 1 ).setBackground( Color.CYAN );
+      components.get( 2 ).setBackground( Color.DARK_GRAY );
+      components.get( 3 ).setBackground( Color.GRAY );
+      components.get( 4 ).setBackground( Color.LIGHT_GRAY );
       components.get( 5 ).setBackground( Color.BLUE );
+      components.get( 6 ).setBackground( Color.MAGENTA );
+      components.get( 7 ).setBackground( Color.ORANGE );
       components.get( 8 ).setBackground( Color.GREEN );
   }
 }
