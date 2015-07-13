@@ -10,13 +10,15 @@ public class MyFrameDemo {
 	
 	public static void main(String[] args) {
 		MyFrame grid = new MyFrame();
-		Container container = null;
+		Container container = grid.getContentPane();
 		ArrayList<JPanel> components = null;
+		JPanel temp = new JPanel();
 		grid.setSize(900,900);
 		grid.setResizable( false );
 		grid.setLocationRelativeTo( null );
 		grid.setLayout( new GridLayout(3,3) );
-		grid.makeGridContainer(container, grid);
-		grid.makeGridComponents(components);
+		grid.makeGridContainer(container, temp);
+		grid.makeGridComponents(components, temp);
+		grid.setVisible(true);
 	}
 }
