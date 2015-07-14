@@ -1,1 +1,3 @@
-# LearnjavaLearn
+# The Moving Square Game
+
+The SQUARE MOVES IN DIRECTIONS SUCH WOW!
