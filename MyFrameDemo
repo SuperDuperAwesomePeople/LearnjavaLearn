@@ -1,4 +1,6 @@
 import java.awt.Container;
+import javax.swing.*;
+import java.awt.event.*;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.util.ArrayList;
@@ -6,16 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 
-public class MyFrameDemo extends JFrame {
+public class MyFrameDemo extends JFrame implements KeyListener{
+	
+	static MyFrameDemo grid = new MyFrameDemo();
+	static int r = 4;
+	static Container container = grid.getContentPane();
+	static ArrayList<JPanel>components = new ArrayList<JPanel>();
 	
 	public static void main(String[] args) {
-		MyFrameDemo grid = new MyFrameDemo();
+		grid.addKeyListener(grid);
 		grid.setSize(900,900);
 		grid.setResizable( false );
 		grid.setLocationRelativeTo( null );
-		grid.setLayout( new GridLayout(3,3) );
-		Container container = grid.getContentPane();
-		ArrayList<JPanel>components = new ArrayList<JPanel>();
+		grid.setLayout( new GridLayout(r,r) );
 		JPanel temp = null;
 		for ( int i = 0; i < 9; i++ )
 		{
@@ -24,6 +29,46 @@ public class MyFrameDemo extends JFrame {
 			  components.add(temp);
 		}
 		grid.setVisible(true);
-		components.get( 4 ).setBackground( Color.GREEN );
+
+		components.get( r ).setBackground( Color.GREEN );
+	}
+	
+	
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode()==38){
+			r = r - 3;
+			components.get( r ).setBackground( Color.GREEN );
+			components.get(r + 3).setBackground(Color.WHITE);
+		}
+		if(e.getKeyCode()==37){
+			r = r - 1;
+			components.get( r ).setBackground( Color.GREEN );
+			components.get(r + 1).setBackground(Color.WHITE);
+		}
+		if(e.getKeyCode()==39){
+			r = r + 1;
+			components.get( r ).setBackground( Color.GREEN );
+			components.get(r - 1).setBackground(Color.WHITE);
+		}
+		if(e.getKeyCode()==40){
+			r = r + 3;
+			components.get( r ).setBackground( Color.GREEN );
+			components.get(r - 3).setBackground(Color.WHITE);
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
