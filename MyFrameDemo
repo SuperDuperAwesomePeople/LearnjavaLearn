@@ -27,6 +27,8 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 			  temp = new JPanel();
 			  container.add(temp);
 			  components.add(temp);
+			  components.get( i ).setBackground( Color.WHITE );
+			  
 		}
 		grid.setVisible(true);
 
@@ -38,22 +40,22 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==38){
+		if(e.getKeyCode()==38 && r > 2){
 			r = r - 3;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r + 3).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==37){
+		if(e.getKeyCode()==37 && r % 3 != 0){
 			r = r - 1;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r + 1).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==39){
+		if(e.getKeyCode()==39 && r % 3 != 2){
 			r = r + 1;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r - 1).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==40){
+		if(e.getKeyCode()==40 && r < 6){
 			r = r + 3;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r - 3).setBackground(Color.WHITE);
