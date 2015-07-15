@@ -1,15 +1,17 @@
 import java.awt.Container;
+import java.util.List;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
 
 public class MyFrameDemo extends JFrame implements KeyListener{
-	
 	static MyFrameDemo grid = new MyFrameDemo();
 	static int r = 3;
 	static Container container = grid.getContentPane();
@@ -35,27 +37,57 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 		components.get( r ).setBackground( Color.GREEN );
 	}
 	
-	
+	public static boolean bricksUp(int[] array, int number) {	
+		int a =  Arrays.binarySearch(array, (number - 3));
+		if(a > 0)
+			return true;
+		else
+			return false;
+	}
+	public static boolean bricksDown(int[] array, int number) {	
+		int a =  Arrays.binarySearch(array, (number + 3));
+		if(a > 0)
+			return true;
+		else
+			return false;
+	}
+	public static boolean bricksRight(int[] array, int number ) {	
+		int a =  Arrays.binarySearch(array, (number + 1));
+		if(a > 0)
+			return true;
+		else
+			return false;
+	}
+	 public static boolean bricksLeft(int[] array, int number) {	
+		int a =  Arrays.binarySearch(array, (number - 1));
+		if(a > 0)
+			return true;
+		else
+			return false;
+	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode()==38 && r > 2){
+		int[] bricks = new int[2];
+		bricks[0] = 1;
+		bricks[1] = 5;
+		Arrays.sort(bricks);
+		if(e.getKeyCode()==38 && r > 2 && bricksUp(bricks, r) == false){
 			r = r - 3;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r + 3).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==37 && r % 3 != 0){
+		if(e.getKeyCode()==37 && r % 3 != 0 && bricksLeft(bricks, r) == false){
 			r = r - 1;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r + 1).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==39 && r % 3 != 2){
+		if(e.getKeyCode()==39 && r % 3 != 2 && bricksRight(bricks, r) == false){
 			r = r + 1;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r - 1).setBackground(Color.WHITE);
 		}
-		if(e.getKeyCode()==40 && r < 6){
+		if(e.getKeyCode()==40 && r < 6 && bricksDown(bricks, r) == false){
 			r = r + 3;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r - 3).setBackground(Color.WHITE);
