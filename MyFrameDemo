@@ -68,10 +68,10 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int[] bricks = new int[2];
-		bricks[0] = 1;
-		bricks[1] = 5;
-		Arrays.sort(bricks);
+		int[] bricks = new int[3];
+		bricks[0] = -1;
+		bricks[1] = 1;
+		bricks[2] = 5;
 		if(e.getKeyCode()==38 && r > 2 && bricksUp(bricks, r) == false){
 			r = r - 3;
 			components.get( r ).setBackground( Color.GREEN );
