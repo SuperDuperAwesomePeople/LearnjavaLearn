@@ -24,11 +24,11 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 	    return start;
 	}
 	
-	public static int randBrick(int min, int max, int start) {
+	public static int randBrick(int start) {
 	    Random rand = new Random();
-	    int randomBrick = rand.nextInt((max - min) + 1) + min;
+	    int randomBrick = rand.nextInt((24 - 0) + 1) + 0;
 	    while (randomBrick == start){
-		    randomBrick = rand.nextInt((max - min) + 1) + min;
+		    randomBrick = rand.nextInt((24 - 0) + 1) + 0;
 	    }
 	    return randomBrick;
 	}
@@ -53,11 +53,11 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 		components.get( 12 ).setBackground( Color.GREEN );
 		int start = randStart(0, 24);
 		bricks[0] = -1;
-		bricks[1] = randBrick(0, 24, start);
-		bricks[2] = randBrick(0, 24, start);
-		bricks[3] = randBrick(0, 24, start);
-		bricks[4] = randBrick(0, 24, start);
-		bricks[5] = randBrick(0, 24, start);
+		bricks[1] = randBrick(start);
+		bricks[2] = randBrick(start);
+		bricks[3] = randBrick(start);
+		bricks[4] = randBrick(start);
+		bricks[5] = randBrick(start);
 		for (int i = 1; i < 6; i++){
 			int brick;
 			brick = bricks[i];
