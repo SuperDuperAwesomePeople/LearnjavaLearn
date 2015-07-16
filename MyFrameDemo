@@ -11,27 +11,14 @@ import java.awt.Color;
 import javax.swing.*;
 
 
-public class MyFrameDemo extends JFrame implements KeyListener{
+public class MyFrameDemo extends JFrame implements KeyListener {
+	
 	static MyFrameDemo grid = new MyFrameDemo();
 	static int r = 12;
 	static Container container = grid.getContentPane();
 	static ArrayList<JPanel>components = new ArrayList<JPanel>();
-	static int[] bricks = new int[6];
-
-	public static int randStart(int min, int max) {
-	    Random rand = new Random();
-	    int start = rand.nextInt((max - min) + 1) + min;
-	    return start;
-	}
-	
-	public static int randBrick(int start) {
-	    Random rand = new Random();
-	    int randomBrick = rand.nextInt((24 - 0) + 1) + 0;
-	    while (randomBrick == start){
-		    randomBrick = rand.nextInt((24 - 0) + 1) + 0;
-	    }
-	    return randomBrick;
-	}
+	static int[] bricks = new int[7];
+	static String facing = "neutral";
 	
 	public static void main(String[] args) {
 		grid.addKeyListener(grid);
@@ -51,18 +38,22 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 		grid.setVisible(true);
 
 		components.get( 12 ).setBackground( Color.GREEN );
-		int start = randStart(0, 24);
+		
 		bricks[0] = -1;
-		bricks[1] = randBrick(start);
-		bricks[2] = randBrick(start);
-		bricks[3] = randBrick(start);
-		bricks[4] = randBrick(start);
-		bricks[5] = randBrick(start);
-		for (int i = 1; i < 6; i++){
+		bricks[1] = 2;
+		bricks[2] = 3;
+		bricks[3] = 4;
+		bricks[4] = 7;
+		bricks[5] = 8;
+		bricks[6] = 9;
+		
+		for (int i = 1; i < 7; i++){
 			int brick;
 			brick = bricks[i];
 			components.get(brick).setBackground(Color.ORANGE);
 		}
+		
+		components.get(9).setBackground(Color.BLUE);
 	}
 	
 	public static boolean bricksUp(int[] array, int number) {	
@@ -98,25 +89,42 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if(e.getKeyCode()==38 && r > 4 && bricksUp(bricks, r) == false){
-			r = r - 5;
-			components.get( r ).setBackground( Color.GREEN );
-			components.get(r + 5).setBackground(Color.WHITE);
+		if(e.getKeyCode()==38){
+			facing = "up";
+			if(r > 4 && bricksUp(bricks, r) == false) {
+				r = r - 5;
+				components.get( r ).setBackground( Color.GREEN );
+				components.get(r + 5).setBackground(Color.WHITE);
+			}
 		}
-		if(e.getKeyCode()==37 && r % 5 != 0 && bricksLeft(bricks, r) == false){
-			r = r - 1;
-			components.get( r ).setBackground( Color.GREEN );
-			components.get(r + 1).setBackground(Color.WHITE);
+		if(e.getKeyCode()==37){
+			facing = "left";
+			if(r % 5 != 0 && bricksLeft(bricks, r) == false) {
+				r = r - 1;
+				components.get( r ).setBackground( Color.GREEN );
+				components.get(r + 1).setBackground(Color.WHITE);
+			}
 		}
-		if(e.getKeyCode()==39 && r % 5 != 4 && bricksRight(bricks, r) == false){
-			r = r + 1;
-			components.get( r ).setBackground( Color.GREEN );
-			components.get(r - 1).setBackground(Color.WHITE);
+		if(e.getKeyCode()==39){
+			facing = "right";
+			if(r % 5 != 4 && bricksRight(bricks, r) == false) {
+				r = r + 1;
+				components.get( r ).setBackground( Color.GREEN );
+				components.get(r - 1).setBackground(Color.WHITE);
+			}
 		}
-		if(e.getKeyCode()==40 && r < 20 && bricksDown(bricks, r) == false){
+		if(e.getKeyCode()==40){
+			facing = "down";
+			if(r < 20 && bricksDown(bricks, r) == false) {
 			r = r + 5;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r - 5).setBackground(Color.WHITE);
+			}
+		}
+		if(e.getKeyCode()==84){
+			if (facing == "up" && r == 14){
+				JOptionPane.showMessageDialog(null,"Wizard: You Suck");
+			}
 		}
 	}
 
