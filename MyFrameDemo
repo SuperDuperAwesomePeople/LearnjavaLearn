@@ -13,23 +13,37 @@ import javax.swing.*;
 
 public class MyFrameDemo extends JFrame implements KeyListener{
 	static MyFrameDemo grid = new MyFrameDemo();
-	static int r = 12;
+	static int r = 5;
 	static Container container = grid.getContentPane();
 	static ArrayList<JPanel>components = new ArrayList<JPanel>();
 	static int[] bricks = new int[6];
+	static int start;
+	static int finishLine;
 
 	public static int randStart(int min, int max) {
 	    Random rand = new Random();
 	    int start = rand.nextInt((max - min) + 1) + min;
+		components.get( start ).setBackground( Color.GREEN );
 	    return start;
 	}
 	
-	public static int randBrick(int start) {
+	public static int randFinish(int start) {
+	    Random rand = new Random();
+	    int randomFinish = rand.nextInt((24 - 13) + 1) + 13;
+	    while (randomFinish == start){
+		    randomFinish = rand.nextInt((24 - 13) + 1) + 13;
+	    }
+	    components.get( randomFinish ).setBackground( Color.RED );
+	    return randomFinish;
+	}
+	
+	public static int randBrick(int finishLine) {
 	    Random rand = new Random();
 	    int randomBrick = rand.nextInt((24 - 0) + 1) + 0;
-	    while (randomBrick == start){
+	    while (randomBrick == 1 || randomBrick == 6 || randomBrick == 5 || randomBrick == (finishLine - 1) || randomBrick == (finishLine + 1) || randomBrick == (finishLine + 5) || randomBrick == (finishLine - 5) || randomBrick == finishLine){
 		    randomBrick = rand.nextInt((24 - 0) + 1) + 0;
 	    }
+		components.get(randomBrick).setBackground(Color.ORANGE);
 	    return randomBrick;
 	}
 	
@@ -49,46 +63,41 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 			  
 		}
 		grid.setVisible(true);
-
-		components.get( 12 ).setBackground( Color.GREEN );
-		int start = randStart(0, 24);
+		start = randStart(0, 24);
+		finishLine = randFinish(start);
 		bricks[0] = -1;
-		bricks[1] = randBrick(start);
-		bricks[2] = randBrick(start);
-		bricks[3] = randBrick(start);
-		bricks[4] = randBrick(start);
-		bricks[5] = randBrick(start);
-		for (int i = 1; i < 6; i++){
-			int brick;
-			brick = bricks[i];
-			components.get(brick).setBackground(Color.ORANGE);
-		}
+		bricks[1] = randBrick(finishLine);
+		bricks[2] = randBrick(finishLine);
+		bricks[3] = randBrick(finishLine);
+		bricks[4] = randBrick(finishLine);
+		bricks[5] = randBrick(finishLine);
+		Arrays.sort(bricks);
 	}
 	
 	public static boolean bricksUp(int[] array, int number) {	
 		int a =  Arrays.binarySearch(array, (number - 5));
-		if(a > 0)
+		if(a > 0 || finishLine == number - 5)
 			return true;
 		else
 			return false;
 	}
 	public static boolean bricksDown(int[] array, int number) {	
 		int a =  Arrays.binarySearch(array, (number + 5));
-		if(a > 0)
+		if(a > 0 || finishLine == number + 5)
 			return true;
 		else
 			return false;
 	}
 	public static boolean bricksRight(int[] array, int number ) {	
 		int a =  Arrays.binarySearch(array, (number + 1));
-		if(a > 0)
+		if(a > 0 || finishLine == number + 1)
 			return true;
 		else
 			return false;
 	}
 	 public static boolean bricksLeft(int[] array, int number) {	
 		int a =  Arrays.binarySearch(array, (number - 1));
-		if(a > 0)
+		if(a > 0 || finishLine == number - 1)
 			return true;
 		else
 			return false;
@@ -97,12 +106,11 @@ public class MyFrameDemo extends JFrame implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-
 		if(e.getKeyCode()==38 && r > 4 && bricksUp(bricks, r) == false){
 			r = r - 5;
 			components.get( r ).setBackground( Color.GREEN );
 			components.get(r + 5).setBackground(Color.WHITE);
-		}
+		} 
 		if(e.getKeyCode()==37 && r % 5 != 0 && bricksLeft(bricks, r) == false){
 			r = r - 1;
 			components.get( r ).setBackground( Color.GREEN );
